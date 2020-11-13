@@ -1,38 +1,64 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #636668;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-bottom: 20px;
+  padding-bottom: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+.logo {
+  max-width: 100px;
+  pointer-events: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo-header {
+  
+}
+
+/* Calendar adjustments */
+.rbc-calendar {
+  margin: 0px 20px 20px 20px !important;
+}
+
+.rbc-event {
+  background-color: #02435c !important;
+}
+
+.rbc-selected {
+  background-color: #1d99cb !important;
+}
+
+.rbc-event-content {
+  color: white;
+  font-weight: 800;
+}
+
+.rbc-toolbar-label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.rbc-today {
+  background-color: #34A2CC !important;
+}
+
+.rbc-off-range-bg {
+  background-color: #636668 !important;
+}
+/* END: Calendar adjustments */
+
+/* For modal events with images */
+img {
+  max-width: 200px !important;
+  padding-top: 12px;
 }
