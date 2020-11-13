@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './App.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-import { Modal, Table } from 'react-bootstrap';
+import { Modal, Table, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -17,6 +18,7 @@ class App extends Component {
       bizzaboEvents: [],
       modalIsOpen: false,
       // Event Information Included on Modal
+      eventImage: '',
       eventName: '',
       eventID: null,
       eventType: '',
@@ -31,14 +33,14 @@ class App extends Component {
   };
 
   handleOpen = (event) => {
-    // console.log(event.venue.displayAddress)
     this.setState({
       modalIsOpen: true,
+      eventImage: event.coverPhotoUrl,
       eventName: event.name,
       eventID: event.id,
       eventType: event.type,
-      eventStartDate: event.startDate,
-      eventEndDate: event.endDate,
+      eventStartDate: event.start,
+      eventEndDate: event.end,
       eventTimezone: event.timezone,
       eventLocation: (event.venue ? event.venue.displayAddress : 'Not Available'),
       eventWebsite: event.websiteUrl,
@@ -55,12 +57,7 @@ class App extends Component {
     }
   }
 
-  convertDate = (date) => {
-    return moment.utc(date).toDate()
-  }
-
   componentDidMount() {
-    let self = this
     const proxyURL = 'https://sleepy-refuge-91522.herokuapp.com/'
     const URL = 'https://api.bizzabo.com/api/events'
     const proxiedURL = proxyURL + URL
@@ -72,20 +69,19 @@ class App extends Component {
       }
     })
       .then(response => {
-        console.log(response.data.content);
+        // console.log(response.data.content);
         let events = response.data.content;
 
         for (let i = 0; i < events.length; i++) {
           events[i].title = events[i].name
-          events[i].start = this.convertDate(events[i].startDate)
-          events[i].end = this.convertDate(events[i].endDate)
-          events[i].venue = events[i].venue
+          events[i].start = moment(events[i].startDate).format('LLL')
+          events[i].end = moment(events[i].endDate).format('LLL')
+          events[i].venue = events[i].venue // Iron out this assignment
         }
 
         this.setState({
           bizzaboEvents: events
         })
-  
       })
       .catch(function (error) {
         console.log(error);
@@ -96,6 +92,7 @@ class App extends Component {
 
     const { bizzaboEvents,
             modalIsOpen,
+            eventImage,
             eventName,
             eventID,
             eventType,
@@ -111,10 +108,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">Bizzabo Events Calendar</h1>
+          <Image className="logo" src="BizzaboLogo.png" rounded />
+          <h2 className="logo-header">Scheduled Events</h2>
         </header>
-        <div style={{ height: 700 }}>
+        <div className="Calendar-div" style={{ height: 700 }}>
           <Calendar
             localizer={localizer}
             events={bizzaboEvents}
@@ -132,14 +129,16 @@ class App extends Component {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            autoFocus={true}
           >
             <Modal.Header closeButton>
               <Modal.Title>
-                <strong>{eventName}</strong> - Event ID: {eventID}
+                <strong>{eventName}</strong> - Event ID: {eventID}<br/>
+                <Image src={eventImage} rounded />
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Table striped bordered hover>
+              <Table striped bordered hover size="xl" responsive="lg">
                 <thead>
                   <tr>
                     <th>Type</th>
@@ -157,7 +156,7 @@ class App extends Component {
                   </tr>
                 </tbody>
               </Table>
-              <Table striped bordered hover>
+              <Table striped bordered hover size="xl" responsive="lg">
                 <thead>
                   <tr>
                     <th>Location</th>
@@ -170,7 +169,7 @@ class App extends Component {
                   <tr>
                     <td>{eventLocation}</td>
                     <td>{eventWebsite}</td>
-                    <td>{eventSupportEmail}</td>
+                    <a href={`mailto:${eventSupportEmail}` }><td>{eventSupportEmail}</td></a>
                     <td>{eventStatus}</td>
                   </tr>
                 </tbody>
