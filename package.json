@@ -9,6 +9,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "moment": "^2.29.1",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-big-calendar": "^0.28.6",
     "react-bootstrap": "^1.4.0",
