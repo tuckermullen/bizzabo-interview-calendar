@@ -61,7 +61,7 @@ class App extends Component {
 
   componentDidMount() {
     let self = this
-    const proxyURL = 'https://cors-anywhere.herokuapp.com/'
+    const proxyURL = 'https://sleepy-refuge-91522.herokuapp.com/'
     const URL = 'https://api.bizzabo.com/api/events'
     const proxiedURL = proxyURL + URL
 
