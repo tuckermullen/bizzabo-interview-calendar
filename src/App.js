@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    events: []
+  }
+
+  constructor() {
+    super();
+    const proxyURL = 'https://cors-anywhere.herokuapp.com/'
+    const URL = 'https://api.bizzabo.com/api/events'
+    const proxiedURL = proxyURL + URL
+
+    axios.get(proxiedURL, {
+      headers: {
+        'Accept': 'application/vnd.bizzabo.v2.0+json',
+        'Authorization': 'Bearer ' + process.env.REACT_APP_BIZZABO_API_KEY
+      }
+    })
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Bizzabo Data</h1>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
