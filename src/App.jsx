@@ -8,7 +8,8 @@ import axios from 'axios'
 import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-moment.locale('en-GB');
+// Use moment.js to set time for US and for local time conversion
+moment.locale('en-US');
 const localizer = momentLocalizer(moment)
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
     this.state = {
       bizzaboEvents: [],
       modalIsOpen: false,
-      // Event Information Included on Modal
+      // Prep Calendar Event Information Below
       eventImage: '',
       eventName: '',
       eventID: null,
@@ -33,6 +34,8 @@ class App extends Component {
     }
   };
 
+  // Update the event state information when a specific event is opened (clicked)
+  // Includes adjusting `modalIsOpen` value to open the actual modal
   handleOpen = (event) => {
     this.setState({
       modalIsOpen: true,
@@ -50,6 +53,7 @@ class App extends Component {
     })
   }
 
+  // Adjust the modalIsOpen state to close the model
   handleClose = () => {
     if (this.state.modalIsOpen) {
       this.setState({
@@ -58,6 +62,9 @@ class App extends Component {
     }
   }
 
+  // Proxy the API link to bypass CORS block/error
+  // Fetch API data using axios. Use .then() promise to update required data for BigCalendar
+  // Includes a .catch() for any unexpected errors
   componentDidMount() {
     const proxyURL = 'https://sleepy-refuge-91522.herokuapp.com/'
     const URL = 'https://api.bizzabo.com/api/events'
