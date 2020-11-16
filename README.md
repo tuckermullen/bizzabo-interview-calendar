@@ -1,6 +1,6 @@
 # Bizzabo Events Calendar (Interview Assignment)
 
-This project was an assignment for an interview with [http://bizzabo.com/](Bizzabo). It's a Calendar application that utilizies Bizzabo's event API to fetch and populate events within the calendar. It is built with the following technologies:
+This project was an assignment for an interview with [Bizzabo](http://bizzabo.com/). It's a Calendar application that utilizies Bizzabo's event API to fetch and populate events within the calendar. It is built with the following technologies:
 
 - [React.js](https://reactjs.org/)
 - [React Big Calendar](https://github.com/jquense/react-big-calendar)
