@@ -8,8 +8,6 @@ This project was an assignment for an interview with [Bizzabo](http://bizzabo.co
 - [Moment.js](https://momentjs.com/)
 - [React Bootstrap](https://react-bootstrap.github.io/)
 
-You can view project [here](#).
-
 ## To Launch This Project Locally, Follow These Steps:
 
 Clone and install:
@@ -23,7 +21,7 @@ npm i
 Start your development server:
 
 ```
-yarn start
+npm start
 ```
 
 The app should open in a browser. If it doesn't, visit [http://localhost:3000](http://localhost.com:3000).
